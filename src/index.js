@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 
 // 创建简单的react元素
@@ -58,24 +58,45 @@ import ReactDOM from 'react-dom'
 //         children: ['这是一个h1标签']
 //     }]
 // }
-class App extends React.Component {
+// class App extends React.Component {
+//     render() {
+//         return (
+//             React.createElement(
+//                 'div', {
+//                 className: 'app',
+//             },
+//                 '这是一个div标签',
+//                 React.createElement(
+//                     'h1', {
+
+//                 },
+//                     '这是一个h1标签'
+//                 )
+//             )
+//         )
+//     }
+// }
+
+import './index.css' //推荐使用
+import styled from 'styled-components'
+const H3 = styled.h3({
+    color: 'blue',
+});
+export default class App extends Component {
     render() {
         return (
-            React.createElement(
-                'div', {
-                className: 'app',
-            },
-                '这是一个div标签',
-                React.createElement(
-                    'h1', {
-
-                },
-                    '这是一个h1标签'
-                )
-            )
+            //按需载入 classnames库也可以实现相关按需载入
+            <div className={['title', true ? 'hello' : ''].join(" ")}>
+                载入style
+                <h1 className={`title${true ? ' red' : ''}`}>这是一个h1标签</h1>
+                <h2 style={{ color: 'green' }}>这是一个h2标签</h2>
+                <H3>这是一个h3标签,styled-components的使用</H3>
+            </div >
         )
     }
 }
+
+
 
 ReactDOM.render(
     <App title="16.12.0" />, //相当于自动执行了App里的render
