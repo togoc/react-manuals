@@ -26,9 +26,20 @@ export default class App extends Component {
             }
         ]
     }
+    componentDidMount() {
+        // this.setState((preState, preProps) => {
+        //     return {
+        //         isLiked: '❤'
+        //     }
+        // })
+        this.setState({
+            isLiked: '❤'
+        })
+    }
     render() {
         return (
             <>
+                <h1>{this.state.isLiked}</h1>
                 <TodoHeader name="togoc">{this.state.title}</TodoHeader>
                 <TodoInput />
                 <TodoList todos={this.state.todos} />

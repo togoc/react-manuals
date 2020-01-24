@@ -22,10 +22,24 @@
 + 组件传值校验
   + prop-types
 + state(class独有)
++ setState(异步)
+  ```js
+    this.setState((preState, preProps) => {
+            return {
+                isLiked: '❤'
+            }
+        },()=>{
+    })
+    
+    this.setState({
+        isLiked: '❤'
+        },()=>{
+    })
+  ```
 + 内嵌innerHTML
   + dangerouslySetInnerHTML
-
 ### master 
+
 ### master 
 ### master 
 ### master 
