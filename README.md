@@ -46,6 +46,15 @@
 ### lesson-5-lifecycle
 
 ### lesson-6-hooks 
++ 它可以让你在不编写 class 的情况下使用 state 以及其他的 React 特性。
 + useState
 + useEffect 
-### master 
++ 
+### lesson-7-context
++ Context 提供了一个无需为每层组件手动添加 props，就能在组件树间进行数据传递的方法。
++ createContext
++ Provider
++ Consumer
++ dynamic : 通过Provider组件传递value的内容,子组件用static contextType = ThemeContext获取内容
+
+### lesson-7-context

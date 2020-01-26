@@ -1,38 +1,65 @@
-import React, { useState, useEffect } from 'react'
-//Hook 是 React 16.8 的新增特性。
-//它可以让你在不编写 class 的情况下使用 state 以及其他的 React 特性。
-export default function App() {
-    const [todos, setCount] = useState([
-        {
-            id: 0,
-            title: '1'
-        },
-        {
-            id: 1,
-            title: '2'
-        },
-    ]);
-    //就是一个 Effect Hook，给函数组件增加了操作副作用的能力。
-    //它跟 class 组件中的 componentDidMount、componentDidUpdate 和 componentWillUnmount
-    // 具有相同的用途，只不过被合并成了一个 API。
-    useEffect(() => {
-        console.log('更新了')
-    })
-    return (
-        <div>
-            {
-                todos.map(v => {
-                    return <p key={v.id}>{v.title}</p>
-                })
-            }
-            <button onClick={() => setCount([...todos, {
-                id: Math.random(),
-                title: '2'
-            }])}>
-                Click me
-            </button>
-        </div>
-    );
+import React, { Component, createContext } from 'react'
+//第一种方法
+const ThemeContext = React.createContext('light');
+
+//第二种方法 
+const {
+    Provider,
+    Consumer
+} = createContext()
+
+class CountBtn extends Component {
+    //第一种方法
+    static contextType = ThemeContext;
+    render() {
+        let props = this.props
+        console.log(this.context) //light
+        return (
+            <button {...props} />
+        )
+    }
 }
 
+class Counter extends Component {
 
+    render() {
+
+        return (
+            //第二种方法 
+            <Consumer>
+                {/* Consumer必须使用函数传参的方法 */}
+                {
+                    (arg) => {
+                        return <span>{arg}</span>
+                    }
+                }
+            </Consumer >
+        )
+    }
+}
+
+export default class App extends Component {
+    state = {
+        count: 10
+    }
+    decrement = () => {
+        this.setState(state => ({
+            count: state.count - 1
+        }))
+    }
+    increment = () => {
+        this.setState(state => ({
+            count: state.count + 1
+        }))
+    }
+    render() {
+        // 通过provider组件的value传值,无需在Counter组件写prop
+        return (
+            <Provider value={this.state.count}>
+                <CountBtn onClick={this.decrement}>-</CountBtn>
+                <Counter />
+                <CountBtn onClick={this.increment}>+</CountBtn>
+            </Provider>
+        )
+    }
+}
