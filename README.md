@@ -58,3 +58,5 @@
 + dynamic : 通过Provider组件传递value的内容,子组件用static contextType = ThemeContext获取内容
 
 ### lesson-8-HOC
++ react-app-rewired (需要配置)
++ customize-cra
