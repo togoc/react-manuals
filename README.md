@@ -61,6 +61,9 @@
 + react-app-rewired (需要配置)
 + customize-cra
 
-### lesson-9-redux
+### lesson-9-redux(手动连接)
++ getState dispatch subscribe 
 + createStore
 + combineReducers
+
+### lesson-10-react-redux
