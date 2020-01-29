@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <button onclick="store.dispatch({
+        type:'-'
+    })">-</button>
+    <span id="count">10</span>
+    <button onclick="store.dispatch({
+        type:'+'
+    })">+</button>
+</body>
+<script>
+    const count = document.querySelector("#count")
+    const state1 = {
+        count: 5
+    }
+
+
+    const changeState = (state, action) => {
+        switch (action.type) {
+            case '-':
+                return {
+                    ...state,
+                    count: state.count - 1
+                }
+            case '+':
+                return {
+                    ...state,
+                    count: state.count + 1
+                }
+            default:
+                break;
+        }
+    }
+
+    const createStore = (state, changeState) => {
+        const getState = () => state
+        const listeners = []
+        const subscribe = (listener) => listeners.push(listener)
+        const dispatch = (action) => {
+            //每次的state都是新的state 不会修改原state
+            state = changeState(state, action)
+            listeners.forEach(listener => listener())
+        }
+        return {
+            getState,
+            dispatch,
+            subscribe
+        }
+    }
+
+    const store = createStore(state1, changeState)
+
+    const renderCount = () => {
+        count.innerHTML = store.getState().count
+    }
+    renderCount()
+    store.subscribe(renderCount)
+</script>
+
+</html>

@@ -60,3 +60,7 @@
 ### lesson-8-HOC
 + react-app-rewired (需要配置)
 + customize-cra
+
+### lesson-9-redux
++ createStore
++ combineReducers

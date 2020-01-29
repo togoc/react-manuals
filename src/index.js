@@ -1,12 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
-//dynamic
-// import App from './dynamic/app'
 
+import store from './store'
+console.log(store)
+window.store = store
 
 ReactDOM.render(
-    <App />
+    <App store={store} />
     ,
     document.querySelector('#root')
 )
