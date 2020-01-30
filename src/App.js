@@ -14,6 +14,7 @@ export default class App extends Component {
         name: 'togoc'
     }
     render() {
+
         return (
             <div>
                 <ul>
@@ -21,6 +22,12 @@ export default class App extends Component {
                     <li><Link to="/artical">文章</Link></li>
                     <li><Link to="/user">用户</Link></li>
                 </ul>
+                <Route render={(RouteProps) => {
+                    //可以通过render方法传值
+                    //可以判断是否登录返回页面
+                    if (!true)
+                        return <Redirect to="/login" />
+                }} path="/" />
                 <Switch>
                     {/* <Route render={Routeprops => <Login {...Routeprops} name={this.state.name} />} /> */}
                     <Route component={Home} path="/home" />
@@ -28,6 +35,7 @@ export default class App extends Component {
                     <Route component={ArticalDetail} path="/artical/:id" />
                     <Route component={User} path="/user" />
                     <Route component={NotFound} path="/404" />
+                    <Route component={Login} path="/login" />
                     <Redirect from="/" to="/home" exact />
                     <Redirect to="/404" />
                 </Switch>
