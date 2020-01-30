@@ -29,7 +29,6 @@ export default class App extends Component {
                         return <Redirect to="/login" />
                 }} path="/" />
                 <Switch>
-                    {/* <Route render={Routeprops => <Login {...Routeprops} name={this.state.name} />} /> */}
                     <Route component={Home} path="/home" />
                     <Route component={Artical} path="/artical" exact />
                     <Route component={ArticalDetail} path="/artical/:id" />
