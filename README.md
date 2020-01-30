@@ -1,7 +1,6 @@
 ### master 
 + build
 
-
 ### lesson-1 
 + index文件说明
   + react
@@ -76,5 +75,24 @@
     import Reducer from './reducers'
     export default createStore(Reducer, applyMiddleware(thunk))
     ```
+
 ### lesson-10-router
-+ 
++ react-router-dom
+  + HashRouter / BrowserRouter
+  + Route
+  + Link
+    + 显示传参: match(to="/xx?params=xxx")
+    + 隐式传参: location里面取值
+     ```js
+     to={
+         pathname:'/xxx',
+         state:{
+             name:'tgc'
+         }
+     }
+      ```
+  + NavLink(相对于Link有active类名)
+  + Redirect
+  + Switch
+  + exact : 完全(准确的)匹配, 比如说 path="/artical" 会匹配(占用)  path="/artical/:id" 使后者显示不出, 加exact可解决
+  + withRouter (给自定义组件添加Route API => BackHome)

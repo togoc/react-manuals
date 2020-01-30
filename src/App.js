@@ -1,71 +1,42 @@
 import React, { Component } from 'react'
-import { increment, decrement, decrementAsyn } from './action/cart'
-import { connect } from 'react-redux'
-class App extends Component {
+import { Route, NavLink as Link, Redirect, Switch } from 'react-router-dom'
+import {
+    Artical,
+    User,
+    Home,
+    ArticalDetail,
+    NotFound,
+    Login
+} from './pages'
+
+export default class App extends Component {
     state = {
-        cart: []
-    }
-    getState = () => {
-        this.setState((state) => {
-            let { cart } = this.props
-            return { cart }
-        })
-    }
-    componentDidMount() {
-        this.getState()
-        // this.props.store.subscribe(this.getState) //修改数据后重新渲染
+        name: 'togoc'
     }
     render() {
-        const { decrement, increment, decrementAsyn } = this.props
-        console.log(this.props)
         return (
-            <table border='1' cellSpacing="0">
-                <thead>
-                    <tr>
-                        <th>名称</th>
-                        <th>价格</th>
-                        <th>数量</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        this.state.cart.map(v => (
-                            <tr key={v.id}>
-                                <td>{v.title}</td>
-                                <td>{v.price}</td>
-                                <td style={{ display: 'flex', justifyContent: 'space-around' }}>
-                                    <button onClick={() => {
-                                        // decrement(v.id)
-                                        //异步延迟两秒
-                                        decrementAsyn(v.id)
-                                    }}>-</button>
-                                    {v.amount}
-                                    <button onClick={() => {
-                                        increment(v.id)
-                                    }}>+</button>
-                                </td>
-                            </tr>
-                        ))
-                    }
-                </tbody>
-            </table>
+            <div>
+                <ul>
+                    <li><Link to="/home">首页</Link></li>
+                    <li><Link to="/artical">文章</Link></li>
+                    <li><Link to="/user">用户</Link></li>
+                </ul>
+                <Switch>
+                    {/* <Route render={Routeprops => <Login {...Routeprops} name={this.state.name} />} /> */}
+                    <Route component={Home} path="/home" />
+                    <Route component={Artical} path="/artical" exact />
+                    <Route component={ArticalDetail} path="/artical/:id" />
+                    <Route component={User} path="/user" />
+                    <Route component={NotFound} path="/404" />
+                    <Redirect from="/" to="/home" exact />
+                    <Redirect to="/404" />
+                </Switch>
+            </div>
         )
     }
 }
-
-//connect传递的内容都会传到目标的props
-export default connect((state) => {
-    return state
-}, { increment, decrement, decrementAsyn })(App)
- //{ ...Actions }
-
-//第二个参数等价于 
 /**
- dispatch => {
-    return {
-        increment: (id) => dispatch(increment(id))
-        ,
-        decrement: (id) => dispatch(decrement(id))
-    }
-}
+ * Switch: 每个路由都是一个case 匹配后直接break, 不然会全部渲染再选择
+ * exact : 完全匹配, 比如说 path="/artical" 会匹配(占用)  path="/artical/:id" 使后者显示不出, 加exact可解决
+ * render : 传值
  */

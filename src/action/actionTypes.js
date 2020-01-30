@@ -1,4 +1,0 @@
-export default {
-    CART_INCREMENT: "CART_INCREMENT",
-    CART_DECREMENT: "CART_DECREMENT",
-}

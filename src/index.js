@@ -1,15 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
+import { HashRouter, Route } from 'react-router-dom'
 import App from './App'
 
-import store from './store'
-window.store = store
 
 ReactDOM.render(
-    <Provider store={store}>
-        <App />
-    </Provider>
+    <HashRouter>
+        <Route component={App} path="/" >
+        </Route>
+    </HashRouter>
     ,
     document.querySelector('#root')
 )
