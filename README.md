@@ -76,3 +76,5 @@
     import Reducer from './reducers'
     export default createStore(Reducer, applyMiddleware(thunk))
     ```
+### lesson-10-router
++ 

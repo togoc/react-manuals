@@ -18,7 +18,7 @@ export const decrement = (id) => {
     }
 }
 
-//异步
+//异步 可以进行一些ajax请求
 export const decrementAsyn = id => dispatch => {
     setTimeout(() => {
         dispatch(decrement(id))
