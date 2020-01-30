@@ -58,10 +58,12 @@ export default connect((state) => {
 }, { increment, decrement })(App)
 
 //第二个参数等价于 
-dispatch => {
+/**
+ dispatch => {
     return {
         increment: (id) => dispatch(increment(id))
         ,
         decrement: (id) => dispatch(decrement(id))
     }
 }
+ */

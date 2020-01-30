@@ -67,3 +67,4 @@
 + combineReducers
 
 ### lesson-10-react-redux
++ Provider connect
