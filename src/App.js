@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { increment, decrement } from './action/cart'
+import { increment, decrement, decrementAsyn } from './action/cart'
 import { connect } from 'react-redux'
 class App extends Component {
     state = {
@@ -16,7 +16,7 @@ class App extends Component {
         // this.props.store.subscribe(this.getState) //修改数据后重新渲染
     }
     render() {
-        const { decrement, increment } = this.props
+        const { decrement, increment, decrementAsyn } = this.props
         console.log(this.props)
         return (
             <table border='1' cellSpacing="0">
@@ -35,7 +35,9 @@ class App extends Component {
                                 <td>{v.price}</td>
                                 <td style={{ display: 'flex', justifyContent: 'space-around' }}>
                                     <button onClick={() => {
-                                        decrement(v.id)
+                                        // decrement(v.id)
+                                        //异步延迟两秒
+                                        decrementAsyn(v.id)
                                     }}>-</button>
                                     {v.amount}
                                     <button onClick={() => {
@@ -53,9 +55,9 @@ class App extends Component {
 
 //connect传递的内容都会传到目标的props
 export default connect((state) => {
-    console.log(state)
     return state
-}, { increment, decrement })(App)
+}, { increment, decrement, decrementAsyn })(App)
+ //{ ...Actions }
 
 //第二个参数等价于 
 /**

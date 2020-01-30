@@ -16,4 +16,11 @@ export const decrement = (id) => {
             id
         }
     }
-} 
+}
+
+//异步
+export const decrementAsyn = id => dispatch => {
+    setTimeout(() => {
+        dispatch(decrement(id))
+    }, 2000);
+}

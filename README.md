@@ -68,3 +68,11 @@
 
 ### lesson-10-react-redux
 + Provider connect
++ redux-thunk (异步)
++ store.js
+    ```js
+    import { createStore, applyMiddleware } from 'redux'
+    import thunk from 'redux-thunk';
+    import Reducer from './reducers'
+    export default createStore(Reducer, applyMiddleware(thunk))
+    ```
