@@ -98,7 +98,7 @@
   + withRouter (给自定义组件添加Route API => BackHome)
 
 ### 开启gzip打包
-+ customize-cra =>
++ customize-cra => `config-overrides.js`
     ```js
     const { override, fixBabelImports, addLessLoader } = require('customize-cra');
     const CompressionWebpackPlugin = require('compression-webpack-plugin');
