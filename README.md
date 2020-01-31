@@ -1,68 +1,132 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### master 
++ build
 
-## Available Scripts
+### lesson-1 
++ index文件说明
+  + react
+  + react-dom
++ jsx原理
 
-In the project directory, you can run:
+### lesson-2-style 
++ 样式引入和使用相关
+  + styled-components
++ 按需引入类
+  + classnames
 
-### `yarn start`
+### lesson-3-componnets l
++ 组件化开发
+  + export { default as TodoHeader } from ''
++ 组件传值
+  + props children
++ 组件传值校验
+  + prop-types
++ state(class独有)
++ setState(异步)
+  ```js
+    this.setState((preState, preProps) => {
+            return {
+                isLiked: '❤'
+            }
+        },()=>{
+    })
+    
+    this.setState({
+        isLiked: '❤'
+        },()=>{
+    })
+  ```
++ 内嵌innerHTML
+  + dangerouslySetInnerHTML
+### lesson-4-on 事件
++  onClick
++  onChange
++  onKeyUp
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### lesson-5-lifecycle
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+### lesson-6-hooks 
++ 它可以让你在不编写 class 的情况下使用 state 以及其他的 React 特性。
++ useState
++ useEffect 
 
-### `yarn test`
+### lesson-7-context
++ Context 提供了一个无需为每层组件手动添加 props，就能在组件树间进行数据传递的方法。
++ createContext
++ Provider
++ Consumer
++ dynamic : 通过Provider组件传递value的内容,子组件用static contextType = ThemeContext获取内容
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### lesson-8-HOC
++ react-app-rewired (需要配置)
++ customize-cra
 
-### `yarn build`
+### lesson-9-redux(手动连接)
++ getState dispatch subscribe 
++ createStore
++ combineReducers
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### lesson-10-react-redux
++ Provider connect
++ redux-thunk (异步)
++ store.js
+    ```js
+    import { createStore, applyMiddleware } from 'redux'
+    import thunk from 'redux-thunk';
+    import Reducer from './reducers'
+    export default createStore(Reducer, applyMiddleware(thunk))
+    ```
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### lesson-10-router
++ react-router-dom
+  + HashRouter / BrowserRouter
+  + Route
+  + Link
+    + 显示传参: match(to="/xx?params=xxx")
+    + 隐式传参: location里面取值
+     ```js
+     to={
+         pathname:'/xxx',
+         state:{
+             name:'tgc'
+         }
+     }
+      ```
+  + NavLink(相对于Link有active类名)
+  + Redirect
+  + Switch
+  + exact : 完全(准确的)匹配, 比如说 path="/artical" 会匹配(占用)  path="/artical/:id" 使后者显示不出, 加exact可解决
+  + withRouter (给自定义组件添加Route API => BackHome)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+### 开启gzip打包
++ customize-cra =>
+    ```js
+    const { override, fixBabelImports, addLessLoader } = require('customize-cra');
+    const CompressionWebpackPlugin = require('compression-webpack-plugin');
+    const themeColor = require('./theme');
+    process.env.GENERATE_SOURCEMAP = "false";// 去除.map
+    module.exports = override(
+        fixBabelImports('import', {
+            libraryName: 'antd',
+            libraryDirectory: 'es',
+            style: true,
+        }),
+        addLessLoader({
+            javascriptEnabled: true,
+            modifyVars: { ...themeColor },
+        }),
+        (config) => {
+            config.plugins = [
+                ...config.plugins,
+                new CompressionWebpackPlugin({
+                    filename: '[path].gz[query]',
+                    algorithm: 'gzip',
+                    test: /\.js$|\.json$|\.css/,
+                    threshold: 0, // 只有大小大于该值的资源会被处理
+                    minRatio: 0.8, // 只有压缩率小于这个值的资源才会被处理
+                    deleteOriginalAssets: false // 删除原文件
+                })
+            ]
+            return config
+        }
+    );
+    ```
