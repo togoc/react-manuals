@@ -115,6 +115,7 @@
             modifyVars: { ...themeColor },
         }),
         (config) => {
+        // config.output.publicPath = "/index";
             config.plugins = [
                 ...config.plugins,
                 new CompressionWebpackPlugin({
@@ -131,5 +132,6 @@
     );
     ```
 ### 生产环境路由配置
+#### history mode
 + 服务器配置基本与vue一致, 客户端路由写法有些不一样.
-+ 客户端: 假如给webpack配置添加 `publicPath = '/index'` 在路由相关标签有 `path` 的必须在头部加上 `/index` , 这时候开发环境是打不开网页的, 只能手动去掉相关配置打包的时候再加上, 这时在服务器部署才不会出错.
++ 客户端: 假如给webpack配置添加 `publicPath = '/index'` (或者在`package.json`添加 `"homepage": "."` ),则 在路由相关标签有 `path` 的必须在头部加上 `/index` , 这时候开发环境是打不开网页的, 只能手动去掉相关配置打包的时候再加上, 这时在服务器部署才不会出错.
